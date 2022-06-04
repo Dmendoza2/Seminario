@@ -21,7 +21,6 @@ module.exports = class Ingresos {
       description: 'CRUD de Ingresos'
     };
   }
-
   async addIngreso({
     type = 'INCOME',description='',amount=0,category=''
   }) {
@@ -32,22 +31,18 @@ module.exports = class Ingresos {
         type,description,amount,category, id: result.lastID
     };
   };
-
   async getIngresos() {
     return this.ingresosDao.getAll();
   }
-
   async getIngresosById({ id }) {
     return this.ingresosDao.getById({ id });
   }
-
   async updateIngresos({ type,description,amount,category, id }) {
     const result = await this.ingresosDao.updateOne({ type,description,amount,category, id });
     return {
       id, type,description,amount,category,modified: result.changes
     }
   }
-
   async deleteIngresos({ id }) {
     const ingresoToDelete = await this.ingresosDao.getById({ id });
     const result = await this.ingresosDao.deleteOne({ id });

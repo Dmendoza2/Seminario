@@ -7,26 +7,20 @@ const user = new User(useDao);
 user.init();
 
 router.get('/', async (req, res) => {
-    // extraer y validar datos del request
     try {
-        // devolver la ejecución el controlador de esta ruta
         const versionData = await user.getUsersVersion();
         return res.status(200).json(versionData);
     } catch (ex) {
-        // manejar el error que pueda tirar el controlador
         console.error('Error User', ex);
         return res.status(502).json({ 'error': 'Error Interno de Server' });
     }
 });
 
 router.get('/allUsers', async (req, res) => {
-    // extraer y validar datos del request
     try {
-        // devolver la ejecución el controlador de esta ruta
         const AllUsers = await user.getUsers();
         return res.status(200).json(AllUsers);
     } catch (ex) {
-        // manejar el error que pueda tirar el controlador
         console.error('Error User', ex);
         return res.status(502).json({ 'error': 'Error Interno de Server' });
     }
@@ -134,7 +128,6 @@ router.put('/update/:id', async (req, res) => {
         res.status(500).json({ error: 'Error al procesar solicitud.' });
     }
 });
-
 
 router.delete('/delete/:id', async (req, res) => {
     try {

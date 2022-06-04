@@ -7,26 +7,20 @@ const ingreso = new Ingresos(ingresoDao);
 ingreso.init();
 
 router.get('/', async (req, res) => {
-    // extraer y validar datos del request
     try {
-        // devolver la ejecución el controlador de esta ruta
         const versionData = await ingreso.getIngresosVersion();
         return res.status(200).json(versionData);
     } catch (ex) {
-        // manejar el error que pueda tirar el controlador
         console.error('Error:', ex);
         return res.status(502).json({ 'error': 'Error Interno de Server' });
     }
 });
 
 router.get('/allIngresos', async (req, res) => {
-    // extraer y validar datos del request
     try {
-        // devolver la ejecución el controlador de esta ruta
         const AllIngresos = await ingreso.getIngresos();
         return res.status(200).json(AllIngresos);
     } catch (ex) {
-        // manejar el error que pueda tirar el controlador
         console.error('Error:', ex);
         return res.status(501).json({ error: 'Error al procesar solicitud.' });
     }
@@ -143,7 +137,6 @@ router.put('/update/:id', async (req, res) => {
         res.status(500).json({ error: 'Error al procesar solicitud.' });
     }
 });
-
 
 router.delete('/delete/:id', async (req, res) => {
     try {

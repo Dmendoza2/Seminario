@@ -7,7 +7,6 @@ const fs = require('fs');
 describe('Testing Usuarios CRUD', ()=>{
   const env = process.env;
   let db, UsrDao, Usr;
-  // Dado que .... al ejecutar | procesar | activar .... se espera que .....
   beforeAll(async ()=>{
     jest.resetModules();
     process.env = {
@@ -37,19 +36,16 @@ describe('Testing Usuarios CRUD', ()=>{
     process.env = env;
     return true;
   });
-
   test('Usuarios insertOne', async ()=>{
     const result = await Usr.addUser(
       { email: "test3@prueba.com", nombre: "Test 3", avatar: "testAvatar3", password: "nondisclose3", estado: "ACT" }
     );
     expect(result.id).toBeGreaterThanOrEqual(1);
   });
-
   test('Usuarios getAll Records', async ()=>{
     const results = await Usr.getUsers();
     expect(results.length).toBeGreaterThan(1);
   });
-
   test('Usuarios updateOne Record', async ()=>{
     const record = await Usr.getUserById({id:2});
     const updatedRecord = await Usr.updateUser({
@@ -62,13 +58,11 @@ describe('Testing Usuarios CRUD', ()=>{
     });
     expect(updatedRecord?.nombre).toEqual(expect.stringContaining('UPD'));
   });
-
   test('Usuario DeleteOne', async ()=>{
     const result = await Usr.deleteUser({id:2});
     const deletedRecord = await Usr.getUserById({id:2});
     expect(deletedRecord).not.toBeDefined();
   });
-
   test('Usuario password Crypted', async ()=>{});
   test('Usuario login ok', async ()=>{});
   test('Usuario login failed', async ()=>{});

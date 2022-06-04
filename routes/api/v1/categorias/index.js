@@ -7,17 +7,14 @@ const cat = new Category(catDao);
 cat.init();
 
 router.get('/', async (req, res) => {
-  // extraer y validar datos del request
   try {
-    // devolver la ejecución el controlador de esta ruta
     const versionData = await cat.getCategoryVersion();
     return res.status(200).json(versionData);
   } catch ( ex ) {
-    // manejar el error que pueda tirar el controlador
     console.error('Error Category', ex);
     return res.status(502).json({'error': 'Error Interno de Server'});
   }
-}); // get /
+});
 
 router.get('/all', async (req, res) => {
   try {
@@ -83,7 +80,6 @@ router.put('/update/:codigo', async (req, res)=>{
         error: 'Se espera valor de estado en ACT o INA'
       });
     }
-
     const updateResult = await cat.updateCategory({codigo:parseInt(codigo), categoria, estado});
 
     if (!updateResult) {
@@ -97,14 +93,12 @@ router.put('/update/:codigo', async (req, res)=>{
   }
 });
 
-
 router.delete('/delete/:codigo', async (req, res) => {
   try {
     const { codigo } = req.params;
     if (!(/^\d+$/.test(codigo))) {
       return res.status(400).json({ error: 'El codigo debe ser un dígito válido.' });
     }
-
     const deletedCategory = await cat.deleteCategory({ codigo: parseInt(codigo)});
 
     if (!deletedCategory) {

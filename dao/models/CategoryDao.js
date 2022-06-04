@@ -41,5 +41,4 @@ module.exports = class CategoryDao extends DaoObject{
     const sqlParamArr = [codigo];
     return this.run(sqlstr, sqlParamArr);
   }
-
 }

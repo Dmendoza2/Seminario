@@ -21,7 +21,6 @@ module.exports = class Users {
       description: 'CRUD de Usuarios'
     };
   }
-
   async addUser({
     avatar = 'NuevoUsuario',
     password = '',
@@ -40,22 +39,18 @@ module.exports = class Users {
       avatar, password, email, nombre, estado, id: result.lastID
     };
   };
-
   async getUsers() {
     return this.userDao.getAll();
   }
-
   async getUserById({ id }) {
     return this.userDao.getById({ id });
   }
-
   async updateUser({ avatar, password, email, nombre, estado, id }) {
     const result = await this.userDao.updateOne({ avatar, password, email, nombre, estado, id });
     return {
       id, avatar, password, email, nombre, estado,modified: result.changes
     }
   }
-
   async deleteUser({ id }) {
     const userToDelete = await this.userDao.getById({ id });
     const result = await this.userDao.deleteOne({ id });
@@ -64,5 +59,4 @@ module.exports = class Users {
       deleted: result.changes
     };
   }
-
 }
